@@ -1,0 +1,25 @@
+version: '3'
+services:
+  docker-python3:
+    image: "docker-python3:${TAG}"
+    container_name: "docker-python3_${TAG}"
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+      args:
+        - UID=1000
+        - USERNAME=user
+        - GID=1000
+        - GROUPNAME=user
+    tty: true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "2"
+    volumes:
+      - ./src:/workspace/src
+    restart: always
+    environment:
+      TZ: Asia/Tokyo
+      ENV: DEVELOPMENT
