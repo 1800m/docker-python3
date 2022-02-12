@@ -1,6 +1,7 @@
 #!/bin/bash -eu
 export `cat .env`
 docker rm -f docker-python3_${TAG}
+docker network rm docker-python3_default
 docker rmi docker-python3:${TAG}
 docker-compose build \
     --build-arg UID=`id -u` \
